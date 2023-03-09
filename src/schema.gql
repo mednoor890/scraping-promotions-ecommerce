@@ -1,0 +1,93 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  _id: ID
+  description: String
+  name: String
+  products: [ProductsType!]
+}
+
+input CategoryInput {
+  _id: ID
+  description: String
+  name: String
+  products: [createInputType!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createCategory(category_details: CategoryInput!): Category!
+  createProduct(product_details: createInputType!): ProductsType!
+  deleteCategory(id: String!): Category!
+  deleteProduct(id: String!): ProductsType!
+  login(email: String!, password: String!): User!
+  registerUser(user_details: UserInput!): User!
+  updateCategory(category: CategoryInput!, id: String!): Category!
+  updateProduct(id: String!, product: createInputType!): ProductsType!
+}
+
+type ProductsType {
+  _id: ID!
+  availibility: String
+  brand: String
+  category: Category
+  description: String
+  discount: Float
+  endDate: DateTime
+  image: String
+  name: String
+  price: Float
+  price_on_discount: Float
+  quantity: Float
+  startDate: DateTime
+}
+
+type Query {
+  getProduct(_id: String!): ProductsType!
+  getProducts: [ProductsType!]!
+}
+
+type User {
+  _id: ID
+  authToken: String
+  createdAt: String
+  email: String
+  firstname: String
+  lastname: String
+  password: String
+  updatedAt: String
+}
+
+input UserInput {
+  _id: ID
+  authToken: String
+  createdAt: String
+  email: String
+  firstname: String
+  lastname: String
+  password: String
+  updatedAt: String
+}
+
+input createInputType {
+  _id: ID
+  availibility: String
+  brand: String
+  category: CategoryInput
+  createdAt: DateTime
+  description: String
+  discount: Float
+  endDate: DateTime
+  image: String
+  name: String
+  price: Float
+  price_on_discount: Float
+  quantity: Float
+  startDate: DateTime
+}

@@ -22,11 +22,14 @@ export class ProductsService {
   }
   async create(products: Products): Promise<Products> {
     const createdProduct = await this.productsRepository.create(products);
-    const category = await this.categoryRepository.findOneById(
+    /*const category = await this.categoryRepository.findOneById(
       products.category._id,
     );
-    category.products.push(createdProduct);
+    category.products.push(createdProduct);*/
 
     return createdProduct;
+  }
+  async getProductsByCategory(categoryId: string): Promise<Products[]> {
+    return this.productsRepository.getProductsByCategory(categoryId);
   }
 }

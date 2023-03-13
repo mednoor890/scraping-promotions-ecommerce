@@ -17,4 +17,10 @@ export class ProductsQueries {
   ): Promise<ProductsType> {
     return await this.productsService.findById(_id);
   }
+  @Query(() => [ProductsType])
+  async getProductsByCategory(
+    @Args('categoryId') categoryId: string,
+  ): Promise<ProductsType[]> {
+    return await this.productsService.getProductsByCategory(categoryId);
+  }
 }

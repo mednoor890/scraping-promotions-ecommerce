@@ -7,9 +7,11 @@ import { join } from 'path';
 import { ProductsModule } from './products/ui';
 import { CategoryModule } from './category/ui';
 import { UserModule } from './users/ui';
+import { CustomersModule } from './customers/ui';
 @Global()
 @Module({
   imports: [
+    CustomersModule,
     CategoryModule,
     ProductsModule,
     UserModule,

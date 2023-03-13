@@ -16,6 +16,22 @@ input CategoryInput {
   products: [createInputType!]
 }
 
+input CustomersInput {
+  email: String!
+  firstName: String!
+  image: String!
+  lastName: String!
+  password: String!
+}
+
+type CustomersType {
+  email: String!
+  firstName: String!
+  image: String!
+  lastName: String!
+  password: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -23,12 +39,15 @@ scalar DateTime
 
 type Mutation {
   createCategory(category_details: CategoryInput!): Category!
+  createCustomer(customer_detail: CustomersInput!): CustomersType!
   createProduct(product_details: createInputType!): ProductsType!
   deleteCategory(id: String!): Category!
+  deleteCustomer(id: String!): CustomersType!
   deleteProduct(id: String!): ProductsType!
   login(email: String!, password: String!): User!
   registerUser(user_details: UserInput!): User!
   updateCategory(category: CategoryInput!, id: String!): Category!
+  updateCustomer(customer_detail: CustomersInput!, id: String!): CustomersType!
   updateProduct(id: String!, product: createInputType!): ProductsType!
 }
 
@@ -49,8 +68,12 @@ type ProductsType {
 }
 
 type Query {
+  getCustomer(id: String!): CustomersType!
+  getCustomerByName(name: String!): CustomersType!
+  getCustomers: [CustomersType!]!
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
+  getProductsByCategory(categoryId: String!): [ProductsType!]!
 }
 
 type User {

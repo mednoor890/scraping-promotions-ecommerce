@@ -24,4 +24,11 @@ export class ProductsRepository {
     const createdProduct = new this.productsModel(products);
     return createdProduct.save();
   }
+  async getProductsByCategory(categoryId: string): Promise<Products[]> {
+    const products = await this.productsModel
+      .find({ categories: categoryId })
+      .populate('category')
+      .exec();
+    return products;
+  }
 }

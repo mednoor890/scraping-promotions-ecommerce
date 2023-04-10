@@ -60,6 +60,7 @@ type ProductsType {
   discount: Float
   endDate: DateTime
   image: String
+  link: String
   name: String
   price: Float
   price_on_discount: Float
@@ -74,6 +75,7 @@ type Query {
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!
+  scraper: [Website1!]!
 }
 
 type User {
@@ -98,6 +100,13 @@ input UserInput {
   updatedAt: String
 }
 
+type Website1 {
+  discount: Float!
+  image: String!
+  name: String!
+  price: Float!
+}
+
 input createInputType {
   _id: ID
   availibility: String
@@ -108,6 +117,7 @@ input createInputType {
   discount: Float
   endDate: DateTime
   image: String
+  link: String
   name: String
   price: Float
   price_on_discount: Float

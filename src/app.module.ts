@@ -8,6 +8,7 @@ import { ProductsModule } from './products/ui';
 import { CategoryModule } from './category/ui';
 import { UserModule } from './users/ui';
 import { CustomersModule } from './customers/ui';
+import { Website1Module } from './scraping/website1/ui';
 @Global()
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { CustomersModule } from './customers/ui';
     CategoryModule,
     ProductsModule,
     UserModule,
+    Website1Module,
     MongooseModule.forRootAsync({
       imports: [ConfigModule.forRoot()],
       inject: [ConfigService],

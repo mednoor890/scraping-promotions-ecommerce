@@ -17,6 +17,8 @@ export class createInputType {
   @Field({ nullable: true })
   price_on_discount: number;
   @Field({ nullable: true })
+  link: string;
+  @Field({ nullable: true })
   createdAt: Date;
   @Field({ nullable: true })
   brand: string;

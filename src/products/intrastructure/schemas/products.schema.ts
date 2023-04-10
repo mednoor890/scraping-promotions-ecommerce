@@ -5,8 +5,6 @@ export type ProductsDocument = Document<Products>;
 @Schema()
 export class Products {
   @Prop()
-  _id: string;
-  @Prop()
   name: string;
   @Prop()
   price: number;
@@ -28,6 +26,10 @@ export class Products {
   brand: string;
   @Prop()
   description: string;
+  @Prop()
+  link: string;
+  /*@Prop()
+  site:string;*/
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
   category: Category;
 

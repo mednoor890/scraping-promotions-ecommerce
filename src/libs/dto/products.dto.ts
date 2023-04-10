@@ -26,6 +26,8 @@ export class ProductsType {
   @Field({ nullable: true })
   brand: string;
   @Field({ nullable: true })
+  link: string;
+  @Field({ nullable: true })
   description: string;
   @Field(() => Category, { nullable: true })
   category: Category;

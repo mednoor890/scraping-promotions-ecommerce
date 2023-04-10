@@ -3,7 +3,6 @@ import { CustomersService } from 'src/customers/domain/customers.service';
 import { CustomersType } from 'src/libs/dto/customers.dto';
 import { CustomersInput } from 'src/libs/inputs/customers.input';
 
-//Mutation.
 @Resolver()
 export class CustomersMutationsResolver {
   constructor(private customersService: CustomersService) {}

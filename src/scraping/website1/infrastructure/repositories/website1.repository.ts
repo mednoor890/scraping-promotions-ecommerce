@@ -16,7 +16,7 @@ export class Website1Repository {
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     const siteUrl = this.configService.get<string>('WEBSITE1_URL');
-    console.log('Site URL:', siteUrl);
+    console.log('scraping data from :', siteUrl, 'processing');
     await page.goto(siteUrl, { timeout: 60000 });
     const parentSelector =
       '.arrival .non-alimentaire .product-item, .arrival .alimentaire .product-item';
@@ -73,5 +73,8 @@ export class Website1Repository {
     await browser.close();
     // return scrappedProducts;
     return this.productModel.create(scrappedProducts);
+  };
+  getScrappedProducts = async (): Promise<Website1[]> => {
+    return await this.productModel.find({ discount: { $ne: 0 } });
   };
 }

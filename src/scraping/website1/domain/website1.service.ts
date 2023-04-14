@@ -9,4 +9,7 @@ export class Website1Service {
     const scrapped = await this.website1Repository.scrape();
     return scrapped;
   };
+  getScrappedProducts = async (): Promise<Website1[]> => {
+    return await this.website1Repository.getScrappedProducts();
+  };
 }

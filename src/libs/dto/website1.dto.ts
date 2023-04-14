@@ -10,4 +10,6 @@ export class Website1 {
   discount: number;
   @Field()
   image: string;
+  @Field()
+  link: string;
 }

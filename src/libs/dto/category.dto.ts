@@ -4,7 +4,7 @@ import { ProductsType } from './products.dto';
 @ObjectType()
 export class Category {
   @Field(() => ID, { nullable: true })
-  _id: string;
+  _id?: string;
   @Field({ nullable: true })
   name: string;
   @Field({ nullable: true })

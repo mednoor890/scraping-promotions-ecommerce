@@ -32,6 +32,8 @@ export class createInputType {
   availibility: string;
   @Field({ nullable: true })
   description: string;
+  @Field({ nullable: true })
+  website: string;
   @Field(() => CategoryInput, { nullable: true })
   category: CategoryInput;
 }

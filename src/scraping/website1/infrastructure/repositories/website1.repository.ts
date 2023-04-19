@@ -67,11 +67,13 @@ export class Website1Repository {
           price,
           discount,
           link,
+          website: 'aziza',
         };
       }),
     );
     await browser.close();
     // return scrappedProducts;
+    await this.productModel.deleteMany({ website: 'aziza' });
     return this.productModel.create(scrappedProducts);
   };
   getScrappedProducts = async (): Promise<Website1[]> => {

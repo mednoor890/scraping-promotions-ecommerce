@@ -28,8 +28,8 @@ export class Products {
   description: string;
   @Prop()
   link: string;
-  /*@Prop()
-  site:string;*/
+  @Prop()
+  website: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
   category: Category;
 

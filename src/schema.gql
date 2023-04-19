@@ -17,19 +17,19 @@ input CategoryInput {
 }
 
 input CustomersInput {
-  email: String!
-  firstName: String!
-  image: String!
-  lastName: String!
-  password: String!
+  email: String
+  firstName: String
+  image: String
+  lastName: String
+  password: String
 }
 
 type CustomersType {
-  email: String!
-  firstName: String!
-  image: String!
-  lastName: String!
-  password: String!
+  email: String
+  firstName: String
+  image: String
+  lastName: String
+  password: String
 }
 
 """
@@ -66,6 +66,7 @@ type ProductsType {
   price_on_discount: Float
   quantity: Float
   startDate: DateTime
+  website: String
 }
 
 type Query {
@@ -125,4 +126,5 @@ input createInputType {
   price_on_discount: Float
   quantity: Float
   startDate: DateTime
+  website: String
 }

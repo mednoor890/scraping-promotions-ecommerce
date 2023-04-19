@@ -5,8 +5,6 @@ export type CategoryDocument = Document<Category>;
 @Schema()
 export class Category {
   @Prop()
-  _id: string;
-  @Prop()
   name: string;
   @Prop()
   description: string;

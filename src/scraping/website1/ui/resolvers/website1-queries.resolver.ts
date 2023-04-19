@@ -5,7 +5,7 @@ import { Cron } from '@nestjs/schedule';
 @Resolver()
 export class wesbite1MutationsResolver {
   constructor(private website1Service: Website1Service) {}
-  @Cron('0 8 * * 3')
+  @Cron('0 16 * * 3')
   @Query(() => [Website1])
   async scraper(): Promise<Website1[]> {
     console.log('Cron job started.');

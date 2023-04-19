@@ -2,14 +2,14 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class CustomersType {
-  @Field()
+  @Field({ nullable: true })
   firstName: string;
-  @Field()
+  @Field({ nullable: true })
   lastName: string;
-  @Field()
+  @Field({ nullable: true })
   email: string;
-  @Field()
+  @Field({ nullable: true })
   image: string;
-  @Field()
+  @Field({ nullable: true })
   password: string;
 }

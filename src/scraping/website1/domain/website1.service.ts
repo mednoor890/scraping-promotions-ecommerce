@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Website1Repository } from '../infrastructure/repositories/website1.repository';
+import { Website1Repository } from '../infrastructure/repository/website1.repository';
 import { Website1 } from 'src/libs/dto/website1.dto';
 
 @Injectable()

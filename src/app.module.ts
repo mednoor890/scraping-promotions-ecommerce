@@ -10,6 +10,8 @@ import { UserModule } from './users/ui';
 import { CustomersModule } from './customers/ui';
 import { Website1Module } from './scraping/website1/ui';
 import { ScheduleModule } from '@nestjs/schedule';
+import { Website2Module } from './scraping/website2/ui';
+import { Website3Module } from './scraping/website3/ui';
 @Global()
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ScheduleModule } from '@nestjs/schedule';
     ProductsModule,
     UserModule,
     Website1Module,
+    Website2Module,
+    Website3Module,
     ScheduleModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule.forRoot()],

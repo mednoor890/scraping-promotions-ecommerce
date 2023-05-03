@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import puppeteer from 'puppeteer';
+import * as puppeteer from 'puppeteer';
+import { Website2 } from 'src/libs/dto/website2.dto';
 import { Products } from 'src/products/intrastructure/schemas/products.schema';
 
 @Injectable()
@@ -12,40 +13,69 @@ export class Website3Repository {
     private readonly productModel: Model<Products>,
     private readonly configService: ConfigService,
   ) {}
-  scraping = async (): Promise<Website3[]> => {
-    const browser = await puppeteer.launch();
+  scraping = async (): Promise<Website2[]> => {
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     const websiteUrl = this.configService.get<string>('WEBSITE3_URL');
-    await page.goto(websiteUrl);
-    // identify the selector of pagination
-    // based on that selector make a loop to loop thrgh the existing pages
-    // identify selectors of the products
-    // the website does not include lazy loading of images ;
-    const paginationUrls = await page.$$eval(
-      'ul.page-list li:not(.spacer) a.js-search-link',
-      (links) => links.map((link) => link.href),
+    const result = [];
+    const initialPageUrl = `${websiteUrl}?page=1`;
+    await page.goto(initialPageUrl);
+    await page.waitForSelector('.product_item');
+
+    // Get the total number of pages from the pagination div
+    const totalPages = await page.$$eval('.page-list li a', (links) =>
+      links.reduce((total, link) => {
+        const pageNumber = parseInt(link.textContent.trim());
+        return isNaN(pageNumber) ? total : Math.max(total, pageNumber);
+      }, 0),
     );
-    for (const url of paginationUrls) {
+
+    for (let i = 1; i <= totalPages; i++) {
+      const url = `${websiteUrl}?page=${i}`;
       await page.goto(url);
-      // i identify the parent selector of the elements to scrape
-      const parentSelector = '.products .product_list.grid.gridcount';
-      const elements = await page.$$(parentSelector);
-      // make a promise.all that needs to return all the elements
-      const data = Promise.all(
-        elements.map(async (element) => {
-          const nameLinkSelector =
-            '.product-miniature .product-description h3 a';
-          const name = element.$eval(nameLinkSelector, (el) =>
-            el.textContent.trim(),
-          );
-          const link = element.$eval(nameLinkSelector, (el) =>
-            el.getAttribute('href'),
-          );
-        }),
-      );
-      // identify the selectors of each element inside the div
-      // extract the data inside each selector
-      // return the result and return the promise
+
+      await page.waitForSelector('.product_item');
+
+      const products = await page.$$('.product_item');
+
+      for (const product of products) {
+        const name = await product.$eval('.product-description h3 a', (el) =>
+          el.textContent.trim(),
+        );
+        const link = await product.$eval('.product-description h3 a', (el) =>
+          el.getAttribute('href'),
+        );
+        const price = await product.$eval(
+          '.product-price-and-shipping .price',
+          (el) => el.textContent.trim(),
+        );
+        const oldPrice = await product.$eval(
+          '.product-price-and-shipping .regular-price',
+          (el) => el.textContent.trim(),
+        );
+        const image = await product.$eval(
+          '.thumbnail-container .thumbnail img',
+          (el) => el.getAttribute('src'),
+        );
+        const discount = await product.$eval('.product-flags .on-sale', (el) =>
+          el.textContent.trim(),
+        );
+
+        result.push({
+          name,
+          link,
+          price: parseFloat(price),
+          price_on_discount: parseFloat(oldPrice),
+          image,
+          discount: parseFloat(discount),
+          brand: null,
+          website: 'exist',
+        });
+      }
     }
+    await browser.close();
+    console.log(result);
+    await this.productModel.deleteMany({ website: 'exist' });
+    return this.productModel.create(result);
   };
 }

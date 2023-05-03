@@ -35,7 +35,7 @@ export class Website2Repository {
   };
 
   scrap = async (): Promise<Website2[]> => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     const websiteUrl = this.configService.get<string>('WEBSITE2_URL');
     console.log('scraping data from :', websiteUrl, 'processing');
@@ -58,12 +58,18 @@ export class Website2Repository {
         const name = await product.$eval(nameSelector, (el) =>
           el.textContent.trim(),
         );
-        let oldPrice = null;
-        if (await product.$(oldPriceSelector)) {
-          const oldPriceContent = await product.$eval(oldPriceSelector, (el) =>
-            el.textContent.trim(),
-          );
-          oldPrice = parseFloat(oldPriceContent);
+        let oldPrice;
+        try {
+          await product.$(oldPriceSelector);
+          {
+            const oldPriceContent = await product.$eval(
+              oldPriceSelector,
+              (el) => el.textContent.trim(),
+            );
+            oldPrice = parseFloat(oldPriceContent);
+          }
+        } catch (error) {
+          oldPrice = 0;
         }
         const link = await product.$eval(linkSelector, (el) =>
           el.getAttribute('href'),
@@ -77,14 +83,13 @@ export class Website2Repository {
         const price = parseFloat(
           await product.$eval(priceSelector, (el) => el.textContent.trim()),
         );
-        let discount = 0;
+        let discount;
         try {
           const discountText = await product.$eval(discountSelector, (el) =>
             el.textContent.trim(),
           );
           discount = parseFloat(discountText);
         } catch (error) {
-          console.log('Discount not found for product:', name);
           discount = 0;
         }
         return {
@@ -100,6 +105,7 @@ export class Website2Repository {
       }),
     );
     await browser.close();
+    await this.productModel.deleteMany({ website: 'pointm' });
     return this.productModel.create(scrappedProduct);
   };
 }

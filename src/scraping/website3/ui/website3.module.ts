@@ -5,10 +5,11 @@ import { Website3Service } from '../domain/website3.service';
 import { Website3Repository } from '../infrastructure/website3.repository';
 import { website3QueriesResolver } from './resolvers/website3-queries.resolver';
 import { ProductsSchema } from 'src/products/intrastructure/schemas/products.schema';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
-    //ScheduleModule.forRoot(),
+    ScheduleModule.forRoot(),
     ConfigModule.forRoot(),
     MongooseModule.forFeature([{ name: 'Products', schema: ProductsSchema }]),
   ],

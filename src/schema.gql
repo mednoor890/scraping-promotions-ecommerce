@@ -79,6 +79,8 @@ type Query {
   getScrappedProducts: [Website1!]!
   scrap: [Website2!]!
   scraper: [Website1!]!
+  scraping: [Website2!]!
+  scrapingW: [Website2!]!
 }
 
 type User {
@@ -112,7 +114,7 @@ type Website1 {
 }
 
 type Website2 {
-  brand: String!
+  brand: String
   discount: Float!
   image: String!
   link: String!

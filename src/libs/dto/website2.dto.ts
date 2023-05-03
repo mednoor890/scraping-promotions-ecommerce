@@ -14,6 +14,6 @@ export class Website2 {
   link: string;
   @Field()
   price_on_discount: number;
-  @Field()
+  @Field({ nullable: true })
   brand: string;
 }

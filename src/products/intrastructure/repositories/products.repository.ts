@@ -31,4 +31,58 @@ export class ProductsRepository {
       .exec();
     return products;
   }
+  async getHighestDiscountAziza(): Promise<Products[]> {
+    try {
+      const azizaProducts = await this.productsModel
+        .find({ website: 'aziza', discount: { $lt: 0 } })
+        .sort({ discount: 1 })
+        .limit(5)
+        .exec();
+
+      if (azizaProducts.length > 0) {
+        return azizaProducts;
+      } else {
+        return [];
+      }
+    } catch (err) {
+      console.log(err);
+      throw new Error('Failed to retrieve Aziza products.');
+    }
+  }
+  async getHighestDiscountPointM(): Promise<Products[]> {
+    try {
+      const PointMProducts = await this.productsModel
+        .find({ website: 'pointm', discount: { $lt: 0 } })
+        .sort({ discount: 1 })
+        .limit(5)
+        .exec();
+
+      if (PointMProducts.length > 0) {
+        return PointMProducts;
+      } else {
+        return [];
+      }
+    } catch (err) {
+      console.log(err);
+      throw new Error('Failed to retrieve Aziza products.');
+    }
+  }
+  async getHighestDiscountExist(): Promise<Products[]> {
+    try {
+      const PointMProducts = await this.productsModel
+        .find({ website: 'exist', discount: { $lt: 0 } })
+        .sort({ discount: 1 })
+        .limit(5)
+        .exec();
+
+      if (PointMProducts.length > 0) {
+        return PointMProducts;
+      } else {
+        return [];
+      }
+    } catch (err) {
+      console.log(err);
+      throw new Error('Failed to retrieve Aziza products.');
+    }
+  }
 }

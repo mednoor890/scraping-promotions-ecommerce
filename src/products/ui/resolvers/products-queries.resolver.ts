@@ -23,4 +23,16 @@ export class ProductsQueries {
   ): Promise<ProductsType[]> {
     return await this.productsService.getProductsByCategory(categoryId);
   }
+  @Query(() => [ProductsType])
+  async getHighestDiscountAziza(): Promise<ProductsType[]> {
+    return await this.productsService.getHighestDiscountAziza();
+  }
+  @Query(() => [ProductsType])
+  async getHighestDiscountPointM(): Promise<ProductsType[]> {
+    return await this.productsService.getHighestDiscountPointM();
+  }
+  @Query(() => [ProductsType])
+  async getHighestDiscountExist(): Promise<ProductsType[]> {
+    return await this.productsService.getHighestDiscountExist();
+  }
 }

@@ -17,6 +17,7 @@ input CategoryInput {
 }
 
 input CustomersInput {
+  _id: ID
   email: String
   firstName: String
   image: String
@@ -25,6 +26,7 @@ input CustomersInput {
 }
 
 type CustomersType {
+  _id: ID!
   email: String
   firstName: String
   image: String
@@ -70,9 +72,14 @@ type ProductsType {
 }
 
 type Query {
+  getCategories: [Category!]!
+  getCategory(_id: String!): Category!
   getCustomer(id: String!): CustomersType!
   getCustomerByName(name: String!): CustomersType!
   getCustomers: [CustomersType!]!
+  getHighestDiscountAziza: [ProductsType!]!
+  getHighestDiscountExist: [ProductsType!]!
+  getHighestDiscountPointM: [ProductsType!]!
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!

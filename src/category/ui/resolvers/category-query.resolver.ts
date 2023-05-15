@@ -5,11 +5,11 @@ import { Category } from 'src/libs/dto/category.dto';
 export class CategoryQueries {
   constructor(private categoryService: CategoryService) {}
   @Query(() => [Category])
-  async getProducts(): Promise<Category[]> {
+  async getCategories(): Promise<Category[]> {
     return await this.categoryService.findAll();
   }
   @Query(() => Category)
-  async getProduct(
+  async getCategory(
     @Args('_id', { type: () => String }) _id: string,
   ): Promise<Category> {
     return await this.categoryService.findById(_id);

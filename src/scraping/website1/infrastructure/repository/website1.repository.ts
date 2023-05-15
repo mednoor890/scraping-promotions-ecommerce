@@ -13,7 +13,7 @@ export class Website1Repository {
     private readonly configService: ConfigService,
   ) {}
   scrape = async (): Promise<Website1[]> => {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
     const siteUrl = this.configService.get<string>('WEBSITE1_URL');
     console.log('scraping data from :', siteUrl, 'processing');

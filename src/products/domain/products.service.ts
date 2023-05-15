@@ -32,4 +32,13 @@ export class ProductsService {
   async getProductsByCategory(categoryId: string): Promise<Products[]> {
     return this.productsRepository.getProductsByCategory(categoryId);
   }
+  async getHighestDiscountAziza(): Promise<Products[]> {
+    return await this.productsRepository.getHighestDiscountAziza();
+  }
+  async getHighestDiscountPointM(): Promise<Products[]> {
+    return await this.productsRepository.getHighestDiscountPointM();
+  }
+  async getHighestDiscountExist(): Promise<Products[]> {
+    return await this.productsRepository.getHighestDiscountExist();
+  }
 }

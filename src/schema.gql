@@ -80,6 +80,7 @@ type Query {
   getHighestDiscountAziza: [ProductsType!]!
   getHighestDiscountExist: [ProductsType!]!
   getHighestDiscountPointM: [ProductsType!]!
+  getHighestDiscountWiki: [ProductsType!]!
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!

@@ -41,4 +41,7 @@ export class ProductsService {
   async getHighestDiscountExist(): Promise<Products[]> {
     return await this.productsRepository.getHighestDiscountExist();
   }
+  async getHighestDiscountWiki(): Promise<Products[]> {
+    return await this.productsRepository.getHighestDiscountWiki();
+  }
 }

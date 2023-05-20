@@ -4,7 +4,7 @@ import { ProductsType } from 'src/libs/dto/products.dto';
 import { ProductsService } from 'src/products/domain/products.service';
 import { AuthGuards } from 'src/users/domain/auth.guard';
 @Resolver()
-@UseGuards(AuthGuards)
+//@UseGuards(AuthGuards)
 export class ProductsQueries {
   constructor(private productsService: ProductsService) {}
   @Query(() => [ProductsType])
@@ -34,5 +34,9 @@ export class ProductsQueries {
   @Query(() => [ProductsType])
   async getHighestDiscountExist(): Promise<ProductsType[]> {
     return await this.productsService.getHighestDiscountExist();
+  }
+  @Query(() => [ProductsType])
+  async getHighestDiscountWiki(): Promise<ProductsType[]> {
+    return await this.productsService.getHighestDiscountWiki();
   }
 }

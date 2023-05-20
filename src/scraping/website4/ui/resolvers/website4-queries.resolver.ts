@@ -5,7 +5,7 @@ import { Website4Service } from '../../domain/website4.service';
 export class website4QueriesResolver {
   constructor(private website4Service: Website4Service) {}
   @Query(() => [Website2])
-  async scrapingW(): Promise<string> {
+  async scrapingW(): Promise<Website2[]> {
     const data = await this.website4Service.scrapingW();
     return data;
   }

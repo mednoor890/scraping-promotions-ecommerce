@@ -17,6 +17,7 @@ input CategoryInput {
 }
 
 input CustomersInput {
+  Token: String
   _id: ID
   email: String
   firstName: String
@@ -26,6 +27,7 @@ input CustomersInput {
 }
 
 type CustomersType {
+  Token: String
   _id: ID!
   email: String
   firstName: String
@@ -47,6 +49,7 @@ type Mutation {
   deleteCustomer(id: String!): CustomersType!
   deleteProduct(id: String!): ProductsType!
   login(email: String!, password: String!): User!
+  loginCustomer(email: String!, password: String!): CustomersType!
   registerUser(user_details: UserInput!): User!
   updateCategory(category: CategoryInput!, id: String!): Category!
   updateCustomer(customer_detail: CustomersInput!, id: String!): CustomersType!
@@ -81,6 +84,7 @@ type Query {
   getHighestDiscountExist: [ProductsType!]!
   getHighestDiscountPointM: [ProductsType!]!
   getHighestDiscountWiki: [ProductsType!]!
+  getLowestPrices: [ProductsType!]!
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!

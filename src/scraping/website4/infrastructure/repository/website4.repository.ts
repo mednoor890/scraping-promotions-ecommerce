@@ -118,7 +118,7 @@ export class Website4Repository {
             description,
             website: 'wiki',
             link,
-            discount: Math.round(100 * ((price - oldPrice) / price)),
+            discount: Math.round(-100 * ((oldPrice - price) / oldPrice)),
           });
         } catch (error) {
           console.error('Error scraping product:', error);

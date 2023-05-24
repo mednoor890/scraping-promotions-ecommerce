@@ -14,4 +14,6 @@ export class CustomersInput {
   image: string;
   @Field({ nullable: true })
   password: string;
+  @Field({ nullable: true })
+  Token: string;
 }

@@ -23,4 +23,11 @@ export class CustomersMutationsResolver {
   ): Promise<CustomersType> {
     return await this.customersService.updateCustomer(_id, customer);
   }
+  @Mutation(() => CustomersType)
+  async loginCustomer(
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ): Promise<CustomersType> {
+    return await this.customersService.loginCustomer(email, password);
+  }
 }

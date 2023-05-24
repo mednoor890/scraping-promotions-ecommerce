@@ -4,20 +4,22 @@ import { ProductsType } from 'src/libs/dto/products.dto';
 import { ProductsService } from 'src/products/domain/products.service';
 import { AuthGuards } from 'src/users/domain/auth.guard';
 @Resolver()
-//@UseGuards(AuthGuards)
 export class ProductsQueries {
   constructor(private productsService: ProductsService) {}
   @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
   async getProducts(): Promise<ProductsType[]> {
     return await this.productsService.findAll();
   }
   @Query(() => ProductsType)
+  @UseGuards(AuthGuards)
   async getProduct(
     @Args('_id', { type: () => String }) _id: string,
   ): Promise<ProductsType> {
     return await this.productsService.findById(_id);
   }
   @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
   async getProductsByCategory(
     @Args('categoryId') categoryId: string,
   ): Promise<ProductsType[]> {
@@ -38,5 +40,9 @@ export class ProductsQueries {
   @Query(() => [ProductsType])
   async getHighestDiscountWiki(): Promise<ProductsType[]> {
     return await this.productsService.getHighestDiscountWiki();
+  }
+  @Query(() => [ProductsType])
+  async getLowestPrices(): Promise<ProductsType[]> {
+    return await this.productsService.getLowestPrices();
   }
 }

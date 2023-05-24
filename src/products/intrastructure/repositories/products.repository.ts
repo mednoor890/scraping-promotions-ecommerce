@@ -103,4 +103,21 @@ export class ProductsRepository {
       throw new Error('Failed to retrieve Aziza products.');
     }
   }
+  async getLowestPrices(): Promise<Products[]> {
+    try {
+      const LowestPrices = await this.productsModel
+        .find()
+        .sort({ price: 1 })
+        .limit(5)
+        .exec();
+      if (LowestPrices.length > 0) {
+        return LowestPrices;
+      } else {
+        return [];
+      }
+    } catch (err) {
+      console.log(err);
+      throw new Error('failed to retrieve lowest 5 prices');
+    }
+  }
 }

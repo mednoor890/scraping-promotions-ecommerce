@@ -44,4 +44,7 @@ export class ProductsService {
   async getHighestDiscountWiki(): Promise<Products[]> {
     return await this.productsRepository.getHighestDiscountWiki();
   }
+  async getLowestPrices(): Promise<Products[]> {
+    return await this.productsRepository.getLowestPrices();
+  }
 }

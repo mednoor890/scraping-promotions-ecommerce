@@ -6,6 +6,8 @@ export type CustomersDocument = Document<Customers>;
 @Schema()
 export class Customers {
   @Prop()
+  _id: string;
+  @Prop()
   firstName: string;
   @Prop()
   lastName: string;
@@ -15,6 +17,8 @@ export class Customers {
   image: string;
   @Prop()
   password: string;
+  @Prop()
+  Token: string;
   /*@Prop()
     comment:string or a particular type ;*/
 }

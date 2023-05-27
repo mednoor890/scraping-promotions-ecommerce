@@ -14,7 +14,7 @@ export class Website3Repository {
     private readonly configService: ConfigService,
   ) {}
   scraping = async (): Promise<Website2[]> => {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: false, devtools: true });
     const page = await browser.newPage();
     const websiteUrl = this.configService.get<string>('WEBSITE3_URL');
     const result = [];
@@ -32,7 +32,7 @@ export class Website3Repository {
 
     for (let i = 1; i <= totalPages; i++) {
       const url = `${websiteUrl}?page=${i}`;
-      await page.goto(url);
+      await page.goto(url, { timeout: 1200000 });
 
       await page.waitForSelector('.product_item');
 

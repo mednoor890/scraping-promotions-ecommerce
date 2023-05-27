@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Customers } from '../schemas/customers.schema';
-import { compare } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 
 @Injectable()
 export class CustomersRepository {
@@ -20,8 +20,14 @@ export class CustomersRepository {
     return await this.customersModel.findOne({ firstName: firstName });
   }
   async createCustomer(customer: Customers): Promise<Customers> {
-    const createdCustomer = new this.customersModel(customer);
-    return await createdCustomer.save();
+    try {
+      const hashed = await hash(customer.password, 10);
+      const createdCustomer = new this.customersModel({
+        ...customer,
+        password: hashed,
+      });
+      return createdCustomer.save();
+    } catch (error) {}
   }
   async updateCustomer(_id, customer: Customers): Promise<Customers> {
     const updatedCustomer = await this.customersModel

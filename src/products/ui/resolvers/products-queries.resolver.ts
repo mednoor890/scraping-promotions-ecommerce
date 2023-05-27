@@ -45,4 +45,24 @@ export class ProductsQueries {
   async getLowestPrices(): Promise<ProductsType[]> {
     return await this.productsService.getLowestPrices();
   }
+  @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
+  async getAziza(): Promise<ProductsType[]> {
+    return await this.productsService.getAziza();
+  }
+  @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
+  async getExist(): Promise<ProductsType[]> {
+    return await this.productsService.getExist();
+  }
+  @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
+  async getWiki(): Promise<ProductsType[]> {
+    return await this.productsService.getWiki();
+  }
+  @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
+  async getPointM(): Promise<ProductsType[]> {
+    return await this.productsService.getPointM();
+  }
 }

@@ -28,7 +28,7 @@ input CustomersInput {
 
 type CustomersType {
   Token: String
-  _id: ID!
+  _id: ID
   email: String
   firstName: String
   image: String
@@ -75,20 +75,24 @@ type ProductsType {
 }
 
 type Query {
+  getAziza: [ProductsType!]!
   getCategories: [Category!]!
   getCategory(_id: String!): Category!
   getCustomer(id: String!): CustomersType!
   getCustomerByName(name: String!): CustomersType!
   getCustomers: [CustomersType!]!
+  getExist: [ProductsType!]!
   getHighestDiscountAziza: [ProductsType!]!
   getHighestDiscountExist: [ProductsType!]!
   getHighestDiscountPointM: [ProductsType!]!
   getHighestDiscountWiki: [ProductsType!]!
   getLowestPrices: [ProductsType!]!
+  getPointM: [ProductsType!]!
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!
   getScrappedProducts: [Website1!]!
+  getWiki: [ProductsType!]!
   scrap: [Website2!]!
   scraper: [Website1!]!
   scraping: [Website2!]!

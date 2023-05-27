@@ -120,4 +120,52 @@ export class ProductsRepository {
       throw new Error('failed to retrieve lowest 5 prices');
     }
   }
+  async getAziza(): Promise<Products[]> {
+    try {
+      const Aziza = await this.productsModel
+        .find({ website: 'aziza' })
+        .sort({ discount: 1 })
+        .exec();
+      console.log(Aziza.length);
+      return Aziza;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getExist(): Promise<Products[]> {
+    try {
+      const Exist = await this.productsModel
+        .find({ website: 'exist' })
+        .sort({ discount: 1 })
+        .exec();
+      console.log(Exist.length);
+      return Exist;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getWiki(): Promise<Products[]> {
+    try {
+      const Wiki = await this.productsModel
+        .find({ website: 'wiki' })
+        .sort({ discount: 1 })
+        .exec();
+      console.log(Wiki.length);
+      return Wiki;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getPointM(): Promise<Products[]> {
+    try {
+      const PointM = await this.productsModel
+        .find({ website: 'pointm' })
+        .sort({ discount: 1 })
+        .exec();
+      console.log(PointM.length);
+      return PointM;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

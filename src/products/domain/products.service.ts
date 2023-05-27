@@ -47,4 +47,16 @@ export class ProductsService {
   async getLowestPrices(): Promise<Products[]> {
     return await this.productsRepository.getLowestPrices();
   }
+  async getAziza(): Promise<Products[]> {
+    return await this.productsRepository.getAziza();
+  }
+  async getExist(): Promise<Products[]> {
+    return await this.productsRepository.getExist();
+  }
+  async getWiki(): Promise<Products[]> {
+    return await this.productsRepository.getWiki();
+  }
+  async getPointM(): Promise<Products[]> {
+    return await this.productsRepository.getPointM();
+  }
 }

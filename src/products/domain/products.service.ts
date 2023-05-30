@@ -59,4 +59,7 @@ export class ProductsService {
   async getPointM(): Promise<Products[]> {
     return await this.productsRepository.getPointM();
   }
+  async getProductsBySearch(productName): Promise<Products[]> {
+    return await this.productsRepository.getProductsBySearch(productName);
+  }
 }

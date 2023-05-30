@@ -65,4 +65,10 @@ export class ProductsQueries {
   async getPointM(): Promise<ProductsType[]> {
     return await this.productsService.getPointM();
   }
+  @Query(() => [ProductsType])
+  async getProductsBySearch(
+    @Args('productName') productName: string,
+  ): Promise<ProductsType[]> {
+    return await this.productsService.getProductsBySearch(productName);
+  }
 }

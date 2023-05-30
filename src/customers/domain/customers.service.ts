@@ -27,6 +27,9 @@ export class CustomersService {
   async deleteCustomer(_id: string): Promise<Customers> {
     return await this.customersRepository.deleteCustomer(_id);
   }
+  async getCustomerBySearch(name: string): Promise<Customers[]> {
+    return await this.customersRepository.getCustomerBySearch(name);
+  }
   async loginCustomer(email: string, password: string): Promise<Customers> {
     const user = await this.customersRepository.findUserByEmail(email);
     const result = await this.customersRepository.verifyUserPassword(

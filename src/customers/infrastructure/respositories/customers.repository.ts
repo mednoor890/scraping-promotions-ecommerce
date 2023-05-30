@@ -21,7 +21,7 @@ export class CustomersRepository {
   }
   async createCustomer(customer: Customers): Promise<Customers> {
     try {
-      const hashed = await hash(customer.password, 10);
+      const hashed = await hash(customer.password, 18);
       const createdCustomer = new this.customersModel({
         ...customer,
         password: hashed,
@@ -52,9 +52,19 @@ export class CustomersRepository {
     user: Customers,
     password: string,
   ): Promise<boolean> {
-    // Compare the hashed password in the database to the input password
-
     const isMatch = await compare(password, user.password);
     return isMatch;
+  }
+  async getCustomerBySearch(name: string): Promise<Customers[]> {
+    try {
+      const searchResults = await this.customersModel
+        .find({ name: { $regex: name, $options: 'i' } })
+        .sort({ firstName: 1 })
+        .exec();
+      return searchResults;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to search for products by name.');
+    }
   }
 }

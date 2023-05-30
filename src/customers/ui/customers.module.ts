@@ -14,7 +14,7 @@ const CustomersResolvers = [
   imports: [
     MongooseModule.forFeature([{ name: 'Customers', schema: CustomersSchema }]),
     JwtModule.register({
-      secret: process.env.SECRET_KEY,
+      secret: process.env.SECRET_KEY_USER,
       signOptions: {
         expiresIn: '24h',
       },

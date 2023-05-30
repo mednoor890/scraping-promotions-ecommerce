@@ -20,4 +20,10 @@ export class CustomersQueriesResolver {
   ): Promise<CustomersType> {
     return await this.customersService.findByCustomerName(firstName);
   }
+  @Query(() => [CustomersType])
+  async getCustomerBySearch(
+    @Args('name') name: string,
+  ): Promise<CustomersType[]> {
+    return await this.customersService.getCustomerBySearch(name);
+  }
 }

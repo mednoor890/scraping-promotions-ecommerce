@@ -168,4 +168,16 @@ export class ProductsRepository {
       console.error(error);
     }
   }
+  async getProductsBySearch(productName: string): Promise<Products[]> {
+    try {
+      const searchResults = await this.productsModel
+        .find({ name: { $regex: productName, $options: 'i' } })
+        .sort({ discount: 1 })
+        .exec();
+      return searchResults;
+    } catch (error) {
+      console.error(error);
+      throw new Error('Failed to search for products by name.');
+    }
+  }
 }

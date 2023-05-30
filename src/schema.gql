@@ -80,6 +80,7 @@ type Query {
   getCategory(_id: String!): Category!
   getCustomer(id: String!): CustomersType!
   getCustomerByName(name: String!): CustomersType!
+  getCustomerBySearch(name: String!): [CustomersType!]!
   getCustomers: [CustomersType!]!
   getExist: [ProductsType!]!
   getHighestDiscountAziza: [ProductsType!]!
@@ -91,6 +92,7 @@ type Query {
   getProduct(_id: String!): ProductsType!
   getProducts: [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!
+  getProductsBySearch(productName: String!): [ProductsType!]!
   getScrappedProducts: [Website1!]!
   getWiki: [ProductsType!]!
   scrap: [Website2!]!

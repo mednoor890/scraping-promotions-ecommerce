@@ -13,6 +13,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { Website2Module } from './scraping/website2/ui';
 import { Website3Module } from './scraping/website3/ui';
 import { Website4Module } from './scraping/website4/ui';
+import { Website5Module } from './scraping/website5/ui';
 @Global()
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { Website4Module } from './scraping/website4/ui';
     Website2Module,
     Website3Module,
     Website4Module,
+    Website5Module,
     ScheduleModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule.forRoot()],

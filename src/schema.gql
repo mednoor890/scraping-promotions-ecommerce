@@ -98,6 +98,7 @@ type Query {
   scrap: [Website2!]!
   scraper: [Website1!]!
   scraping: [Website2!]!
+  scrapingB: [Website2!]!
   scrapingW: [Website2!]!
 }
 

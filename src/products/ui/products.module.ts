@@ -7,12 +7,14 @@ import { ProductsRepository } from '../intrastructure/repositories/products.repo
 import { ProductsSchema } from '../intrastructure/schemas/products.schema';
 import { ProductsMutations } from './resolvers/products-mutation.resolver';
 import { ProductsQueries } from './resolvers/products-queries.resolver';
+import { CustomersModule } from 'src/customers/ui';
 const ProductsResolvers = [ProductsMutations, ProductsQueries];
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Products', schema: ProductsSchema }]),
     CategoryModule,
     UserModule,
+    CustomersModule,
   ],
   providers: [ProductsService, ...ProductsResolvers, ProductsRepository],
 })

@@ -1,5 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
+import { AuthCustomersGuards } from 'src/customers/domain/customersAuth.guard';
 import { ProductsType } from 'src/libs/dto/products.dto';
 import { ProductsService } from 'src/products/domain/products.service';
 import { AuthGuards } from 'src/users/domain/auth.guard';
@@ -7,7 +8,7 @@ import { AuthGuards } from 'src/users/domain/auth.guard';
 export class ProductsQueries {
   constructor(private productsService: ProductsService) {}
   @Query(() => [ProductsType])
-  @UseGuards(AuthGuards)
+  @UseGuards(AuthCustomersGuards, AuthGuards)
   async getProducts(): Promise<ProductsType[]> {
     return await this.productsService.findAll();
   }

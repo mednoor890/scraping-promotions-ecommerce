@@ -2,7 +2,6 @@ import { Args, Query, Resolver } from '@nestjs/graphql';
 import { CustomersService } from 'src/customers/domain/customers.service';
 import { CustomersType } from 'src/libs/dto/customers.dto';
 
-//queries
 @Resolver()
 export class CustomersQueriesResolver {
   constructor(private customersService: CustomersService) {}

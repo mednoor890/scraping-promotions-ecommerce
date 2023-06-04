@@ -9,7 +9,7 @@ export class ProductsRepository {
     @InjectModel(Products.name) private readonly productsModel: Model<Products>,
   ) {}
   async findAll(): Promise<Products[]> {
-    return await this.productsModel.find().exec();
+    return await this.productsModel.find().sort({ discount: 1 }).exec();
   }
   async findById(_id: string): Promise<Products> {
     return await this.productsModel.findById(_id);

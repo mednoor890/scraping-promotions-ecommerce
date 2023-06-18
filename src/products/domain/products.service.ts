@@ -41,6 +41,9 @@ export class ProductsService {
   async getHighestDiscountExist(): Promise<Products[]> {
     return await this.productsRepository.getHighestDiscountExist();
   }
+  async getHighestDiscountBaity(): Promise<Products[]> {
+    return await this.productsRepository.getHighestDiscountBaity();
+  }
   async getHighestDiscountWiki(): Promise<Products[]> {
     return await this.productsRepository.getHighestDiscountWiki();
   }
@@ -49,6 +52,9 @@ export class ProductsService {
   }
   async getAziza(): Promise<Products[]> {
     return await this.productsRepository.getAziza();
+  }
+  async getBaity(): Promise<Products[]> {
+    return await this.productsRepository.getBaity();
   }
   async getExist(): Promise<Products[]> {
     return await this.productsRepository.getExist();

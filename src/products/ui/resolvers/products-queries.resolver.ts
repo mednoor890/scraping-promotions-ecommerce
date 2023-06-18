@@ -39,6 +39,10 @@ export class ProductsQueries {
     return await this.productsService.getHighestDiscountExist();
   }
   @Query(() => [ProductsType])
+  async getHighestDiscountBaity(): Promise<ProductsType[]> {
+    return await this.productsService.getHighestDiscountBaity();
+  }
+  @Query(() => [ProductsType])
   async getHighestDiscountWiki(): Promise<ProductsType[]> {
     return await this.productsService.getHighestDiscountWiki();
   }
@@ -50,6 +54,11 @@ export class ProductsQueries {
   @UseGuards(AuthGuards)
   async getAziza(): Promise<ProductsType[]> {
     return await this.productsService.getAziza();
+  }
+  @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
+  async getBaity(): Promise<ProductsType[]> {
+    return await this.productsService.getBaity();
   }
   @Query(() => [ProductsType])
   @UseGuards(AuthGuards)

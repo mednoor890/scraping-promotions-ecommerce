@@ -103,6 +103,24 @@ export class ProductsRepository {
       throw new Error('Failed to retrieve Aziza products.');
     }
   }
+  async getHighestDiscountBaity(): Promise<Products[]> {
+    try {
+      const BaityProducts = await this.productsModel
+        .find({ website: 'baity', discount: { $lt: 0 } })
+        .sort({ discount: 1 })
+        .limit(5)
+        .exec();
+
+      if (BaityProducts.length > 0) {
+        return BaityProducts;
+      } else {
+        return [];
+      }
+    } catch (err) {
+      console.log(err);
+      throw new Error('Failed to retrieve Aziza products.');
+    }
+  }
   async getLowestPrices(): Promise<Products[]> {
     try {
       const LowestPrices = await this.productsModel
@@ -128,6 +146,18 @@ export class ProductsRepository {
         .exec();
       console.log(Aziza.length);
       return Aziza;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  async getBaity(): Promise<Products[]> {
+    try {
+      const Baity = await this.productsModel
+        .find({ website: 'baity' })
+        .sort({ discount: 1 })
+        .exec();
+      console.log(Baity.length);
+      return Baity;
     } catch (error) {
       console.error(error);
     }

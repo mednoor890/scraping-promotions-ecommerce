@@ -76,6 +76,7 @@ type ProductsType {
 
 type Query {
   getAziza: [ProductsType!]!
+  getBaity: [ProductsType!]!
   getCategories: [Category!]!
   getCategory(_id: String!): Category!
   getCustomer(id: String!): CustomersType!
@@ -84,6 +85,7 @@ type Query {
   getCustomers: [CustomersType!]!
   getExist: [ProductsType!]!
   getHighestDiscountAziza: [ProductsType!]!
+  getHighestDiscountBaity: [ProductsType!]!
   getHighestDiscountExist: [ProductsType!]!
   getHighestDiscountPointM: [ProductsType!]!
   getHighestDiscountWiki: [ProductsType!]!

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
@@ -13,7 +14,6 @@ export class Website5Repository {
     private readonly productModel: Model<Products>,
     private readonly configService: ConfigService,
   ) {}
-
   scrapingB = async (): Promise<Website2[]> => {
     const browser = await puppeteer.launch({ headless: false, devtools: true });
     const page = await browser.newPage();
@@ -36,39 +36,40 @@ export class Website5Repository {
       await page.goto(url, { timeout: 1200000 });
       await page.waitForSelector('.js-product-miniature');
 
-      const products = await page.$$('.js-product-miniature');
+      const productElements = await page.$$('.js-product-miniature');
 
-      for (const product of products) {
-        const name = await product.$eval('.product-name a', (el) =>
-          el.textContent.trim(),
-        );
-        const link = await product.$eval('.product-name a', (el) =>
-          el.getAttribute('href'),
-        );
-        const price = await product.$eval('.price.product-price', (el) =>
-          el.textContent.trim(),
-        );
-        const oldPrice = await product.$eval('.regular-price', (el) =>
-          el.textContent.trim(),
-        );
-        const image = await product.$eval('.product-cover-link img', (el) =>
-          el.getAttribute('src'),
-        );
-        const discount = await product.$eval(
-          '.product-flag.discount span',
-          (el) => el.textContent.trim(),
-        );
+      for (const productElement of productElements) {
+        try {
+          const nameElement = await productElement.$('.product-container .product-name a');
+          const name = await nameElement.evaluate((el) => el.textContent.trim());
 
-        result.push({
-          name,
-          link,
-          price: parseFloat(price),
-          price_on_discount: parseFloat(oldPrice),
-          image,
-          discount: parseFloat(discount),
-          brand: null,
-          website: 'baity',
-        });
+          const linkElement = await productElement.$('.product-container .product-name a');
+          const link = await linkElement.evaluate((el) => el.getAttribute('href'));
+
+          const priceElement = await productElement.$('.price.product-price');
+          const price = await priceElement.evaluate((el) => parseFloat(el.textContent.trim().replace(/[^\d.]/g, '')));
+
+          const oldPriceElement = await productElement.$('.regular-price');
+          const oldPrice = await oldPriceElement.evaluate((el) => parseFloat(el.textContent.trim().replace(/[^\d.]/g, '')));
+
+          const imageElement = await productElement.$('.product-cover-link img');
+          const image = await imageElement.evaluate((el) => el.getAttribute('src'));
+
+          const discount = Math.round(-100 * ((oldPrice - price) / oldPrice));
+
+          result.push({
+            name,
+            link,
+            price,
+            price_on_discount: oldPrice,
+            image,
+            discount,
+            brand: null,
+            website: 'baity',
+          });
+        } catch (error) {
+          console.error('Failed to extract product data:', error);
+        }
       }
     }
 

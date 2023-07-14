@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Query, Resolver } from '@nestjs/graphql';
 import { AuthCustomersGuards } from 'src/customers/domain/customersAuth.guard';
 import { ProductsType } from 'src/libs/dto/products.dto';
 import { ProductsService } from 'src/products/domain/products.service';
@@ -9,8 +9,11 @@ export class ProductsQueries {
   constructor(private productsService: ProductsService) {}
   @Query(() => [ProductsType])
   @UseGuards(AuthCustomersGuards, AuthGuards)
-  async getProducts(): Promise<ProductsType[]> {
-    return await this.productsService.findAll();
+  async getProducts(
+    @Args('page', { type: () => Int, defaultValue: 1 }) page: number,
+    @Args('limit', { type: () => Int, defaultValue: 10 }) limit: number,
+  ): Promise<ProductsType[]> {
+    return await this.productsService.findAll(page, limit);
   }
   @Query(() => ProductsType)
   @UseGuards(AuthGuards)
@@ -51,27 +54,27 @@ export class ProductsQueries {
     return await this.productsService.getLowestPrices();
   }
   @Query(() => [ProductsType])
-  @UseGuards(AuthGuards)
+  //@UseGuards(AuthGuards)
   async getAziza(): Promise<ProductsType[]> {
     return await this.productsService.getAziza();
   }
   @Query(() => [ProductsType])
-  @UseGuards(AuthGuards)
+  // @UseGuards(AuthGuards)
   async getBaity(): Promise<ProductsType[]> {
     return await this.productsService.getBaity();
   }
   @Query(() => [ProductsType])
-  @UseGuards(AuthGuards)
+  //@UseGuards(AuthGuards)
   async getExist(): Promise<ProductsType[]> {
     return await this.productsService.getExist();
   }
   @Query(() => [ProductsType])
-  @UseGuards(AuthGuards)
+  //@UseGuards(AuthGuards)
   async getWiki(): Promise<ProductsType[]> {
     return await this.productsService.getWiki();
   }
   @Query(() => [ProductsType])
-  @UseGuards(AuthGuards)
+  //@UseGuards(AuthGuards)
   async getPointM(): Promise<ProductsType[]> {
     return await this.productsService.getPointM();
   }

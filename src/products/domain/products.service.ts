@@ -8,8 +8,8 @@ export class ProductsService {
     private productsRepository: ProductsRepository,
     private categoryRepository: CategoryRepository,
   ) {}
-  async findAll() {
-    return await this.productsRepository.findAll();
+  async findAll(page: number, limit: number) {
+    return await this.productsRepository.findAll(page, limit);
   }
   async findById(_id: string) {
     return await this.productsRepository.findById(_id);

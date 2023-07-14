@@ -1,6 +1,7 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { CustomersService } from 'src/customers/domain/customers.service';
 import { CustomersType } from 'src/libs/dto/customers.dto';
+import { ProfileType } from 'src/libs/dto/profile.dto';
 
 @Resolver()
 export class CustomersQueriesResolver {
@@ -9,8 +10,8 @@ export class CustomersQueriesResolver {
   async getCustomers(): Promise<CustomersType[]> {
     return this.customersService.findAllCustomers();
   }
-  @Query(() => CustomersType)
-  async getCustomer(@Args('id') _id: string): Promise<CustomersType> {
+  @Query(() => ProfileType)
+  async getCustomer(@Args('id') _id: string): Promise<ProfileType> {
     return await this.customersService.findByCustomerId(_id);
   }
   @Query(() => CustomersType)
@@ -25,4 +26,8 @@ export class CustomersQueriesResolver {
   ): Promise<CustomersType[]> {
     return await this.customersService.getCustomerBySearch(name);
   }
+  /* @Query(() => ProfileType)
+  async getProfile(): Promise<ProfileType> {
+    return await this.customersService.getProfile();
+  }*/
 }

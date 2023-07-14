@@ -8,8 +8,14 @@ export class ProductsRepository {
   constructor(
     @InjectModel(Products.name) private readonly productsModel: Model<Products>,
   ) {}
-  async findAll(): Promise<Products[]> {
-    return await this.productsModel.find().sort({ discount: 1 }).exec();
+  async findAll(page: number, limit: number): Promise<Products[]> {
+    const skip = (page - 1) * limit;
+    return await this.productsModel
+      .find()
+      .sort({ discount: 1 })
+      .skip(skip)
+      .limit(limit)
+      .exec();
   }
   async findById(_id: string): Promise<Products> {
     return await this.productsModel.findById(_id);

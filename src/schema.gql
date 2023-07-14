@@ -34,6 +34,7 @@ type CustomersType {
   image: String
   lastName: String
   password: String
+  profile: ProfileType
 }
 
 """
@@ -74,12 +75,20 @@ type ProductsType {
   website: String
 }
 
+type ProfileType {
+  _id: ID
+  email: String
+  firstName: String
+  image: String
+  lastName: String
+}
+
 type Query {
   getAziza: [ProductsType!]!
   getBaity: [ProductsType!]!
   getCategories: [Category!]!
   getCategory(_id: String!): Category!
-  getCustomer(id: String!): CustomersType!
+  getCustomer(id: String!): ProfileType!
   getCustomerByName(name: String!): CustomersType!
   getCustomerBySearch(name: String!): [CustomersType!]!
   getCustomers: [CustomersType!]!
@@ -92,7 +101,7 @@ type Query {
   getLowestPrices: [ProductsType!]!
   getPointM: [ProductsType!]!
   getProduct(_id: String!): ProductsType!
-  getProducts: [ProductsType!]!
+  getProducts(limit: Int! = 10, page: Int! = 1): [ProductsType!]!
   getProductsByCategory(categoryId: String!): [ProductsType!]!
   getProductsBySearch(productName: String!): [ProductsType!]!
   getScrappedProducts: [Website1!]!

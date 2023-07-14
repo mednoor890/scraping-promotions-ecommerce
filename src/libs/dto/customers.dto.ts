@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { ProfileType } from './profile.dto';
 
 @ObjectType()
 export class CustomersType {
@@ -16,4 +17,6 @@ export class CustomersType {
   password: string;
   @Field({ nullable: true })
   Token: string;
+  @Field(() => ProfileType, { nullable: true })
+  profile?: ProfileType;
 }

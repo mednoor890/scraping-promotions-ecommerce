@@ -31,4 +31,13 @@ export class ProductsMutations {
     const deletedProduct = await this.productsService.delete(_id);
     return deletedProduct;
   }
+  @Mutation(() => ProductsType)
+  async addRating(
+    @Args('productId') _id: string,
+    @Args('rating') rating: number,
+  ): Promise<ProductsType> {
+    // Call the service method to add the rating to the product
+    const rated = await this.productsService.rateProduct(_id, rating);
+    return rated;
+  }
 }

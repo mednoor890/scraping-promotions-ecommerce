@@ -8,12 +8,17 @@ import { AuthGuards } from 'src/users/domain/auth.guard';
 export class ProductsQueries {
   constructor(private productsService: ProductsService) {}
   @Query(() => [ProductsType])
-  @UseGuards(AuthCustomersGuards, AuthGuards)
+  @UseGuards(AuthCustomersGuards)
   async getProducts(
     @Args('page', { type: () => Int, defaultValue: 1 }) page: number,
     @Args('limit', { type: () => Int, defaultValue: 10 }) limit: number,
   ): Promise<ProductsType[]> {
     return await this.productsService.findAll(page, limit);
+  }
+  @Query(() => [ProductsType])
+  @UseGuards(AuthGuards)
+  async getAllProducts(): Promise<ProductsType[]> {
+    return await this.productsService.findAllProducts();
   }
   @Query(() => ProductsType)
   @UseGuards(AuthGuards)
@@ -32,6 +37,10 @@ export class ProductsQueries {
   @Query(() => [ProductsType])
   async getHighestDiscountAziza(): Promise<ProductsType[]> {
     return await this.productsService.getHighestDiscountAziza();
+  }
+  @Query(() => Number)
+  async getAvgRating(@Args('productId') _id: string): Promise<number> {
+    return await this.productsService.getAvgRating(_id);
   }
   @Query(() => [ProductsType])
   async getHighestDiscountPointM(): Promise<ProductsType[]> {

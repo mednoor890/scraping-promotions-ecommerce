@@ -17,8 +17,38 @@ export class ProductsRepository {
       .limit(limit)
       .exec();
   }
+  async findAllProducts(): Promise<Products[]> {
+    return await this.productsModel.find();
+  }
+  async rateProduct(_id: string, rate: number): Promise<Products> {
+    // Find the product by ID
+    const product = await this.productsModel.findById(_id);
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    // Add the rating to the product's ratings array
+    product.rating.push(rate);
+
+    // Save the updated product with the new rating
+    return await product.save();
+  }
   async findById(_id: string): Promise<Products> {
     return await this.productsModel.findById(_id);
+  }
+  async getAvgRating(_id): Promise<number> {
+    const product = await this.productsModel.findById(_id);
+    if (!product) {
+      throw new Error('Product not found');
+    }
+
+    if (product.rating.length === 0) {
+      return 0;
+    }
+
+    const sum = product.rating.reduce((acc, rating) => acc + rating, 0);
+    const averageRating = sum / product.rating.length;
+    return averageRating;
   }
   async update(_id: string, products: Products): Promise<Products> {
     return await this.productsModel.findByIdAndUpdate(_id, products);

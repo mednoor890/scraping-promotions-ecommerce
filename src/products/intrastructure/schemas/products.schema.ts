@@ -30,6 +30,8 @@ export class Products {
   link: string;
   @Prop()
   website: string;
+  @Prop()
+  rating: number[];
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Category' })
   category: Category;
 

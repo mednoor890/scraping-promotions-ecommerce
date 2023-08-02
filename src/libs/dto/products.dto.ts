@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Category } from './category.dto';
 
 @ObjectType()
@@ -21,6 +21,8 @@ export class ProductsType {
   endDate: Date;
   @Field({ nullable: true })
   quantity: number;
+  @Field(() => [Int], { nullable: true }) // Rating is now an array of numbers
+  rating: number[];
   @Field({ nullable: true })
   availibility: string;
   @Field({ nullable: true })

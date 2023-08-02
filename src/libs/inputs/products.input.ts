@@ -1,6 +1,7 @@
-import { Field, ID, InputType } from '@nestjs/graphql';
+import { Field, ID, InputType, Int } from '@nestjs/graphql';
 //import { Category } from '../dto/category.dto';
 import { CategoryInput } from './category.input';
+import { IsInt, Max, Min } from 'class-validator';
 
 @InputType()
 export class createInputType {
@@ -8,6 +9,11 @@ export class createInputType {
   _id: string;
   @Field({ nullable: true })
   name: string;
+  @Field(() => [Int], { nullable: true }) // Rating is now an array of numbers
+  @IsInt({ each: true }) // Validate each element in the array is an integer
+  @Min(1, { each: true }) // Validate each element in the array is at least 1
+  @Max(5, { each: true }) // Validate each element in the array is at most 5
+  rating: number[];
   @Field({ nullable: true })
   price: number;
   @Field({ nullable: true })

@@ -11,6 +11,15 @@ export class ProductsService {
   async findAll(page: number, limit: number) {
     return await this.productsRepository.findAll(page, limit);
   }
+  async findAllProducts() {
+    return await this.productsRepository.findAllProducts();
+  }
+  async getAvgRating(_id) {
+    return await this.productsRepository.getAvgRating(_id);
+  }
+  async rateProduct(_id: string, rate: number) {
+    return await this.productsRepository.rateProduct(_id, rate);
+  }
   async findById(_id: string) {
     return await this.productsRepository.findById(_id);
   }

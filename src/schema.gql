@@ -43,6 +43,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Mutation {
+  addRating(productId: String!, rating: Float!): ProductsType!
   createCategory(category_details: CategoryInput!): Category!
   createCustomer(customer_detail: CustomersInput!): CustomersType!
   createProduct(product_details: createInputType!): ProductsType!
@@ -71,6 +72,7 @@ type ProductsType {
   price: Float
   price_on_discount: Float
   quantity: Float
+  rating: [Int!]
   startDate: DateTime
   website: String
 }
@@ -84,6 +86,8 @@ type ProfileType {
 }
 
 type Query {
+  getAllProducts: [ProductsType!]!
+  getAvgRating(productId: String!): Float!
   getAziza: [ProductsType!]!
   getBaity: [ProductsType!]!
   getCategories: [Category!]!
@@ -168,6 +172,7 @@ input createInputType {
   price: Float
   price_on_discount: Float
   quantity: Float
+  rating: [Int!]
   startDate: DateTime
   website: String
 }
